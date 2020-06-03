@@ -37,7 +37,12 @@ def get_details(driver: webdriver.Chrome):
 
 os.system('figlet cosmote')
 driver = init()
-print('\nTotal: ' + get_gb(driver)+'GB')
-print('==================')
-print(get_details(driver))
+try:
+    print('\nTotal: ' + get_gb(driver)+'GB')
+    print('==================')
+    print(get_details(driver))
+except:
+    print('something went wrong')
+
 driver.close()
+exit(0)
