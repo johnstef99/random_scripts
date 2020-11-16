@@ -1,0 +1,11 @@
+#!/bin/bash
+
+[ -z $1 ] && echo -e "Tag mp3 files based on the filename\n" && echo "filename syntax: \"Artist - Title\"" && exit
+
+file=$1
+
+artist=$(echo "$file" | cut -d'-' -f1);
+title=$(echo "$file" | cut -d'-' -f2 | sed 's/\ //' | sed 's/.mp3//');
+
+echo -e "File:$file\tTitle: $title\tArtist: $artist";
+eyeD3 --title "$title" --artist "$artist" "$file"
