@@ -25,15 +25,16 @@ for (( i=0; i<$length-1; i++))
     file="$artist - $title.mp3"
     begin=${timestamps[$i]}
     end=${timestamps[$i+1]}
-    echo -e "$begin => $end \t TITLE: $title"
+    echo -e "$begin => $end \t ARTIST: $artist \t TITLE: $title"
    	ffmpeg -nostdin -y -loglevel -8 -i "$inputaudio" -ss "$begin" -to "$end" -vn -c copy -metadata title="$title" -metadata artist="$artist" "$folder/$file"
   done
 
 ##exporting last song
 artist=$(echo ${artists[$length-1]} | sed 's/_/\ /g')
 title=$(echo ${titles[$length-1]} | sed 's/_/\ /g')
-file="$artist - $title"
+file="$artist - $title.mp3"
 begin=${timestamps[$length-1]}
 end="END"
-echo -e "$begin => $end \t TITLE: $title"
+echo -e "$begin => $end \t ARTIST: $artist \t TITLE: $title"
 ffmpeg -nostdin -y -loglevel -8 -i "$inputaudio" -ss "$begin" -vn -c copy -metadata title="$title" -metadata artist="$artist" "$folder/$file"
+echo "done"
